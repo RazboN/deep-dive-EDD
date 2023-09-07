@@ -1,0 +1,5 @@
+rootProject.name = 'bank-account'
+
+include 'account.cmd', 'account.query', 'account.common', ':cqrs.core'
+
+project(':cqrs.core').projectDir = new File('../cqrs-es/cqrs.core')
