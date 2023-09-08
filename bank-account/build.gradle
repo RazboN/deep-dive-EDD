@@ -23,25 +23,34 @@ subprojects {
         mavenCentral()
     }
 
-    if (it.name != 'account.cmd' || it.name != 'account.query') {
+    if (it.name == 'account.cmd' || it.name == 'account.query') {
         bootJar {
-            if(it.name != 'cmd'){
+            if (it.name == 'account.cmd') {
                 mainClass = 'com.techbank.account.cmd.CommandApplication'
             } else {
                 mainClass = 'com.techbank.account.query.QueryApplication'
             }
-//            enabled = false
         }
 
         jar {
             enabled = true
         }
+
+
+        if (it.name == 'account.cmd') {
+            dependencies {
+                implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
+            }
+        }
+        else {
+            dependencies {
+                implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+            }
+        }
     }
 
     dependencies {
         implementation 'org.springframework.boot:spring-boot-starter'
-        implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-        implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
         implementation 'org.springframework.boot:spring-boot-starter-web'
         implementation 'org.springframework.kafka:spring-kafka'
 

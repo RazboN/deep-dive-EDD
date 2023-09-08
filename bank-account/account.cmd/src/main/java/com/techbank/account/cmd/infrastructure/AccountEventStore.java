@@ -7,6 +7,7 @@ import com.techbank.cqrs.core.events.EventModel;
 import com.techbank.cqrs.core.exceptions.AggregateNotFoundException;
 import com.techbank.cqrs.core.exceptions.ConcurrencyException;
 import com.techbank.cqrs.core.infrastructure.EventStore;
+import com.techbank.cqrs.core.producers.EventProducer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,10 +18,14 @@ import java.util.stream.Collectors;
 @Service
 public class AccountEventStore implements EventStore {
     @Autowired
-    private EventStoreRepository _repo;
+    private EventStoreRepository eventStoreRepository;
+
+    @Autowired
+    private EventProducer eventProducer;
+
     @Override
     public void saveEvents(String aggregateId, Iterable<BaseEvent> events, int expectedVersion) {
-        var eventStream = _repo.findByAggregateIdentifier(aggregateId);
+        var eventStream = eventStoreRepository.findByAggregateIdentifier(aggregateId);
         if (expectedVersion != -1 &&
                 eventStream.get(eventStream.size() - 1).getVersion() != expectedVersion) {
             throw new ConcurrencyException();
@@ -38,16 +43,16 @@ public class AccountEventStore implements EventStore {
                     .eventType(event.getClass().getTypeName())
                     .eventData(event)
                     .build();
-            var persistedEvent = _repo.save(eventModel);
-            if (persistedEvent != null) {
-                // TODO: kafka ya event yolla
+            var persistedEvent = eventStoreRepository.save(eventModel);
+            if (!persistedEvent.getId().isEmpty()) {
+                eventProducer.produce(event.getClass().getSimpleName(), event);
             }
         }
     }
 
     @Override
     public List<BaseEvent> getEvents(String aggregateId) {
-        var eventStream = _repo.findByAggregateIdentifier(aggregateId);
+        var eventStream = eventStoreRepository.findByAggregateIdentifier(aggregateId);
         if (eventStream == null || eventStream.isEmpty()) {
             throw new AggregateNotFoundException("Incorrect account ID provided!");
         }

@@ -1,5 +1,5 @@
 server:
-  port: 5001
+  port: 3001
 
 spring:
   jpa:
@@ -8,7 +8,7 @@ spring:
     hibernate:
       ddl-auto: update
   datasource:
-    url: jdbc:postgresql://localhost:5451/BankAccount?createDatabseIfNotExist=true
+    url: jdbc:postgresql://localhost:5451/BankAccount?createDatabaseIfNotExist=true
     username: postgres
     password: 123
 
@@ -24,5 +24,5 @@ spring:
       properties:
         spring:
           json:
-            truested:
+            trusted:
               packages: '*'
