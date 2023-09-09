@@ -46,6 +46,7 @@ subprojects {
         else {
             dependencies {
                 implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+                runtimeOnly 'org.postgresql:postgresql'
             }
         }
     } else {
@@ -64,7 +65,6 @@ subprojects {
         implementation 'org.springframework.kafka:spring-kafka'
 
         compileOnly 'org.projectlombok:lombok'
-        runtimeOnly 'org.postgresql:postgresql'
 
         annotationProcessor 'org.projectlombok:lombok'
 

@@ -4,6 +4,7 @@ import com.techbank.account.cmd.domain.AccountAggregate;
 import com.techbank.cqrs.core.domain.AggregateRoot;
 import com.techbank.cqrs.core.handlers.EventSourcingHandler;
 import com.techbank.cqrs.core.infrastructure.EventStore;
+import com.techbank.cqrs.core.producers.EventProducer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +14,9 @@ import java.util.Comparator;
 public class AccountEventSourcingHandler implements EventSourcingHandler<AccountAggregate> {
     @Autowired
     private EventStore eventStore;
+
+    @Autowired
+    private EventProducer eventProducer;
 
     @Override
     public void save(AggregateRoot aggregate) {
@@ -33,5 +37,20 @@ public class AccountEventSourcingHandler implements EventSourcingHandler<Account
             aggregate.setVersion(latestVersion.get());
         }
         return aggregate;
+    }
+
+    @Override
+    public void republishEvent() {
+        var aggregateIds = eventStore.getAggregateIds();
+        for (var aggrId : aggregateIds) {
+            var aggregate = getById(aggrId);
+            if (aggregate == null || !aggregate.getActive())
+                continue;
+
+            var events = eventStore.getEvents(aggrId);
+            for (var event : events) {
+                eventProducer.produce(event.getClass().getSimpleName(), event);
+            }
+        }
     }
 }
