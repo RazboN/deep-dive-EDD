@@ -13,5 +13,6 @@ public class OpenAccountResponse extends BaseResponse {
 
     public OpenAccountResponse(String message, String id) {
         super(message);
+        this.id = id;
     }
 }

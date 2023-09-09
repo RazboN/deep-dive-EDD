@@ -33,6 +33,8 @@ public abstract class AggregateRoot {
     protected void applyChanges(BaseEvent event, Boolean isNewEvent) {
         try {
             var method = getClass().getDeclaredMethod("apply", event.getClass());
+            method.setAccessible(true);
+            method.invoke(this, event);
         } catch (NoSuchMethodException ex) {
             logger.log(Level.WARNING,
                     MessageFormat.format("The Apply method was not found in the aggregate for {0}",

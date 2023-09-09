@@ -19,7 +19,7 @@ public class AccountEventSourcingHandler implements EventSourcingHandler<Account
         eventStore.saveEvents(aggregate.getId(),
                 aggregate.getUncommittedChanges(),
                 aggregate.getVersion());
-        aggregate.markChangesAsCommitted();
+                aggregate.markChangesAsCommitted();
     }
 
     @Override
@@ -27,6 +27,7 @@ public class AccountEventSourcingHandler implements EventSourcingHandler<Account
         var aggregate = new AccountAggregate();
         var events = eventStore.getEvents(id);
         if (events != null && !events.isEmpty()) {
+            aggregate.replayEvents(events);
             var latestVersion = events.stream().map(evn ->
                     evn.getVersion()).max(Comparator.naturalOrder());
             aggregate.setVersion(latestVersion.get());

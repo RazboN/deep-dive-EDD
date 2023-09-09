@@ -4,7 +4,7 @@ import com.techbank.account.common.events.AccountClosedEvent;
 import com.techbank.account.common.events.AccountOpenedEvent;
 import com.techbank.account.common.events.FundsDepositEvent;
 import com.techbank.account.common.events.FundsWithdrawnEvent;
-import com.techbank.account.query.handlers.EventHandler;
+import com.techbank.account.query.infrastructure.handlers.EventHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.support.Acknowledgment;
