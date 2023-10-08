@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="GradleMigrationSettings" migrationVersion="1" />
+  <component name="GradleSettings">
+    <option name="linkedExternalProjectsSettings">
+      <GradleProjectSettings>
+        <option name="externalProjectPath" value="$PROJECT_DIR$/bank-account" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$/bank-account" />
+            <option value="$PROJECT_DIR$/bank-account/account.cmd" />
+            <option value="$PROJECT_DIR$/bank-account/account.common" />
+            <option value="$PROJECT_DIR$/bank-account/account.query" />
+            <option value="$PROJECT_DIR$/cqrs-es/cqrs.core" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+      <GradleProjectSettings>
+        <option name="externalProjectPath" value="$PROJECT_DIR$/cqrs-es/cqrs.core" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$/cqrs-es/cqrs.core" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+    </option>
+  </component>
+</project>

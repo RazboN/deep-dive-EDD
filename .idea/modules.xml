@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/account.cmd/bank-account.account.cmd.main.iml" filepath="$PROJECT_DIR$/.idea/modules/account.cmd/bank-account.account.cmd.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/account.common/bank-account.account.common.main.iml" filepath="$PROJECT_DIR$/.idea/modules/account.common/bank-account.account.common.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/account.query/bank-account.account.query.main.iml" filepath="$PROJECT_DIR$/.idea/modules/account.query/bank-account.account.query.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-718181345/bank-account.cqrs.core.main.iml" filepath="$PROJECT_DIR$/.idea/modules/-718181345/bank-account.cqrs.core.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/cqrs.core.main.iml" filepath="$PROJECT_DIR$/.idea/modules/cqrs.core.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/deep-dive-EDD.iml" filepath="$PROJECT_DIR$/.idea/deep-dive-EDD.iml" />
+    </modules>
+  </component>
+</project>
